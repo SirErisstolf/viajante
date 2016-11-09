@@ -1,0 +1,102 @@
+<section data-ng-controller="ProvidersController" data-ng-init="findOne()">
+    <div class="alert alert-{{notification['tipo']}}" data-ng-repeat="notification in provider['notifications']"
+         data-ng-show="notification['visible']">
+        {{notification['message']}}
+    </div>
+
+    <div class="customBanner" ng-style="{'background-image':'url('+ provider.bannerImg + ')'}">
+        <div class="tittle">{{provider.title}}</div>
+        <div class="slogan">{{provider.subtitle}}</div>
+    </div>
+
+    <div class="customMenu">
+        <div class="menuItem"><a href="#cabins"><h4>Hospedajes</h4></a></div>
+        <div class="menuItem"><a href="#services"><h4>Servicios</h4></a></div>
+        <div class="menuItem"><a href="#location"><h4>Contacto</h4></a></div>
+        <div class="menuItem"><a href="#map"><h4>Mapa</h4></a></div>
+    </div>
+
+    <div class="customContent" ng-style="{'background-color': provider.bgColorSection,color: textColor}">
+        <div class="providerContent">{{provider.content}}</div>
+        <div class="contentGallery">
+            <div ng-repeat="image in provider.contentImages" class="contentGalleryItem">
+                <img ng-src="{{image}}" height="200" width="300"/>
+            </div>
+        </div>
+    </div>
+
+    <a name="cabins"/>
+
+    <div class="customOffer" ng-style="{'background-color': provider.bgColorSection,color: textColor}">
+        <h3>Hospedajes</h3>
+
+        <div data-ng-repeat="cabin in provider.cabin">
+
+            <div class="providerGridElement">
+                <div class="providerTittleGridElement">{{cabin.name}}</div>
+                <div class="providerImageGridElement"><img ng-src="{{cabin.image}}" alt="" width="300px" height="200"/>
+                </div>
+                <div class="providerInfoGridElement">{{formatPrice(cabin.price)}}</div>
+            </div>
+        </div>
+    </div>
+    <a name="services"/>
+
+    <div class="customOffer" ng-style="{'background-color': provider.bgColorSection,color: textColor}">
+        <h3>Servicios</h3>
+
+        <div data-ng-repeat="cabin in provider.service">
+            <ul>
+                <li>
+                    <strong>{{cabin.name}}. </strong> {{cabin.description}}
+
+                </li>
+            </ul>
+        </div>
+        <div class="servicesGallery">
+            <div ng-repeat="image in provider.servicesImages" class="contentGalleryItem">
+                <img ng-src="{{image}}" height="200" width="300"/>
+            </div>
+        </div>
+    </div>
+    <a name="location"/>
+
+    <div class="customLocation" ng-style="{'background-color': provider.bgColorSection,color: textColor}">
+        <div class="customLocationData">
+            <h3>Información de Contacto</h3>
+
+            <div data-ng-repeat="item in provider.contact">
+                <ul>
+                    <!--span> {{item.person}}</span-->
+                    <li><strong> Dirección:</strong> {{item.website}}</li>
+                    <li><strong> Telefono: </strong>+52 {{item.phone}}</li>
+                    <li><strong> Email:</strong> {{item.email}}</li>
+                    <li><strong> Website:</strong> {{item.website}}</li>
+                    <li><strong> Dirección:</strong> {{provider.location[0].address}} - {{provider.location[0].city}}
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <a name="map"/>
+
+        <div class="customLocationMap">
+            <iframe width="100%" height="300" ng-src="{{mapUrl}}"></iframe>
+        </div>
+    </div>
+
+
+    <div class="customFooter" ng-style="{'background-color': provider.bgColorSection,color: textColor}">
+        <p>Derechos Reservados {{provider.title}}. Año {{year}}</p>
+    </div>
+
+
+    <div data-ng-if="hasAuthorization(provider)">
+        <a class="btn" href="/providers/{{provider._id}}/edit">
+            <i class="glyphicon glyphicon-edit"></i>
+        </a>
+        <a class="btn" data-ng-click="remove(provider);" ng-show="isAdmin">
+            <i class="glyphicon glyphicon-trash"></i>
+        </a>
+    </div>
+
+</section>

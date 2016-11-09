@@ -1,0 +1,39 @@
+<div data-ng-controller="LoginCtrl as login">
+
+    <div class="alert alert-danger animated fadeIn" ng-show="login.loginError">{{login.loginError}}</div>
+
+
+    <h2>Ingresar</h2>
+    <form id="login_form" ng-submit="login.login()">
+        <div class="form-group">
+            <input required id="email_block" type="email" 
+                class="form-control" name="email" 
+                placeholder="Email Address" ng-model="login.user.email">
+            <div class="error_message">Por favor ingresa la información correctamente #</div>
+            <span class="pic email"></span>
+        </div>
+
+        <div class="form-group">
+            <input required id="password_block" name="password" 
+                type="{{login.input.type}}" class="form-control" 
+                placeholder="{{login.input.placeholder}}" ng-model="login.user.password">
+            <div class="error_message">Por favor ingresa la información correctamente #</div>
+            <span class="pic password {{login.input.iconClass}}" ng-click = "login.togglePasswordVisible()">
+                <div class="hide_text_password">
+                    {{login.input.tooltipText}}
+                </div>
+            </span>
+        </div>
+
+        <div class="form-group">
+            <a ui-sref='forgot-password'>Olvidaste tu contraseña?</a>
+        </div>
+
+        <div class="form-group">
+            <button type="submit" class="btn btn-success btn-lg btn-block">Ingresar</button>
+            <br/>
+            <a ui-sref='auth.register'>¿No tienes una cuenta? Registrate</a>
+        </div>
+
+    </form>
+</div>

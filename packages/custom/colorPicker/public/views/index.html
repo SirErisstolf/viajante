@@ -1,0 +1,34 @@
+<div class="" data-ng-controller="ColorPickerController">
+  
+
+<div class="section">
+            <h3>Colores de la Página</h3>
+
+            <div class="subsection">
+                <h4>Color de Fondo Secciones</h4>
+                <color-picker ng-model="bgColorSection"></color-picker>
+                <input type="text" ng-model="bgColorSection" ng-init="bgColorSection = '#ffffff'">
+            </div>
+            <div class="subsection">
+                <h4>Color Textos</h4>
+                <color-picker ng-model="textColor"></color-picker>
+                <input type="text" ng-model="textColor" ng-init="textColor = '#000000'">
+            </div>
+
+            <div class="subsection">
+                <h4>Preview</h4>
+
+                <div ng-style="{'background-color': bgColorPage, 'height':'260px' ,'text-align':'center','padding-left':'15px','padding-right':'15px','padding-top':'1px','margin-top':'5px;'}">
+                    <div ng-style="{'background-color': bgColorSection ,color: textColor , 'height':'220','padding-top':'1px','padding-left':'5px','margin-top':'15px',    'border-style': 'dotted','border-width': '1px'}">
+                        <h3>Titulo</h3>
+
+                        <p>Este es el contenido a mostrar en la pagina. Trata de buscar buenas combinaciones para hacer
+                            tu pagina atractiva pero tambien facil de leer, recuerda que tu pagina también será vista
+                            desde celulares.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+  
+</div>
+

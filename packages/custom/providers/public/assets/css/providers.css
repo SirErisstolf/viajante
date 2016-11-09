@@ -1,0 +1,272 @@
+
+/**
+common 
+*/
+.providers-example h1 {
+  background-color: purple;
+}
+
+h3{
+  margin-top: 10px;
+  margin-bottom: 10px;
+  border-bottom: 2px solid;
+}
+h4{
+  margin-top: 5px;
+}
+
+/**
+form 
+*/
+
+.customSelect{
+  height: 34px;
+  margin-left: 15px;
+}
+
+.my-form-group{
+
+}
+
+.cabinForm{
+  border-style: dotted;
+  border-width: 1px;
+  padding-bottom: 5px;
+  margin-bottom: 10px;
+}
+
+.galleryForm{
+  display: inline-block;
+  margin-top: 20px;
+}
+
+.customBtn {
+  background: #3498db;
+  background-image: -webkit-linear-gradient(top, #3498db, #2980b9);
+  background-image: -moz-linear-gradient(top, #3498db, #2980b9);
+  background-image: -ms-linear-gradient(top, #3498db, #2980b9);
+  background-image: -o-linear-gradient(top, #3498db, #2980b9);
+  background-image: linear-gradient(to bottom, #3498db, #2980b9);
+  -webkit-border-radius: 28;
+  -moz-border-radius: 28;
+  border-radius: 28px;
+  text-shadow: 0px 0px 2px #666666;
+  font-family: Arial;
+  color: #ffffff;
+  font-size: 12px;
+  padding: 0px 2px 0px 2px;
+  border: solid #1f628d 2px;
+  text-decoration: none;
+}
+
+.customBtn:hover {
+  background: #3cb0fd;
+  background-image: -webkit-linear-gradient(top, #3cb0fd, #3498db);
+  background-image: -moz-linear-gradient(top, #3cb0fd, #3498db);
+  background-image: -ms-linear-gradient(top, #3cb0fd, #3498db);
+  background-image: -o-linear-gradient(top, #3cb0fd, #3498db);
+  background-image: linear-gradient(to bottom, #3cb0fd, #3498db);
+  text-decoration: none;
+}
+
+
+/********* views **********/
+
+
+/** Cabins gallery  **/
+
+.providerGridElement{ 
+  height: 300px;
+  width: 302px;
+  float:left;
+  margin: 20px;
+}
+
+.providerTittleGridElement{
+  height: 50px;
+  background-color: #eeeeee;
+  padding-top: 15px;
+  font-weight: bold;
+  font-size: 115%;
+  text-align: center;
+  border-width: 2px;
+  border-style: solid;
+}
+.providerInfoGridElement{
+  height: 50px;
+  background-color: #eeeeee;
+  padding-top: 15px;
+  font-weight: bold;
+  font-size: 115%;
+  text-align: center;
+  border-style: solid;
+  border-width: 2px;
+}
+
+.providerImageGridElement{
+  text-align: center;
+  border-left-style: solid;
+  border-right-style: solid;
+  border-width: 2px;
+
+}
+
+/** menu  **/
+
+.customMenu{ 
+  width: 100%;
+  height: 40px; 
+  text-align: center;
+  color: white;
+  text-decoration: bold;
+  font-family: arial;
+  font-size: 30;
+  padding-bottom: 12px;
+  margin-bottom: 5;
+  border-style: dotted;
+  border-width: 1px;
+}
+.menuItem{
+  float: left;
+  background-color: #eeeeee;
+  border-width: 1px;
+  width: 25%;
+  height: 30px; 
+  text-align: center;
+  color: black;
+  text-decoration: bold;
+  font-family: arial;
+  font-size: 50;
+  margin-bottom: 12px;
+  border-style: dotted;
+  border-width: 1px;
+}
+
+/** Banner **/
+
+.tittle{
+  text-shadow: 2px 0 0 #fff, -2px 0 0 #fff, 0 2px 0 #fff, 0 -2px 0 #fff, 1px 1px #fff, -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff;
+  font-size: 250%;
+}
+
+.slogan{
+  text-shadow: 2px 0 0 #fff, -2px 0 0 #fff, 0 2px 0 #fff, 0 -2px 0 #fff, 1px 1px #fff, -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff;
+  font-size: 150%;
+}
+
+/** containers ans sections in view page **/
+
+.providerContent{
+  font-size: 110%;
+  font-family: verdana;
+  padding :10px;
+  text-align: justify;
+}
+
+.section {    
+  background: #eeeeee;
+  padding: 20px;  
+  border-style: dotted;
+  border-width: 1px;
+  margin-bottom: 20px;
+  float:left;
+  width: 100%;   
+}
+
+.subsection {   
+  background: #dddddd;
+  padding: 20px;  
+  border-style: dotted;
+  border-width: 1px;
+  margin-bottom: 20px;
+  padding-bottom: 20px;
+  float:left;
+  width: 100%;
+}
+
+.customBanner{
+  border-style: dotted;
+  border-width: 1px;
+  margin-bottom: 10px;
+  padding: 30px;
+  background-size: cover;
+}
+
+.customContent{    
+  margin-bottom: 10px;
+  padding: 10px;
+  border-style: dotted;
+  border-width: 1px;
+  height: 100%;
+  width: 100%;
+  display: table;
+  text-align: center;
+}
+.customOffer{
+  border-style: dotted;
+  border-width: 1px;
+  margin-bottom: 10px;
+  padding: 10px;
+  display: table;
+  width: 100%
+}
+
+.customLocation{
+  border-style: dotted;
+  border-width: 1px;
+  margin-bottom: 10px;
+  padding: 10px;
+}
+
+.customLocationData{
+
+}
+.customLocationMap{
+     
+}
+
+.imagesContent{
+  border-style: dotted;
+  border-width: 1px;
+  padding: 5px;
+  margin: 5px;
+  float: left;
+}
+
+.contentGallery{
+  display: inline-table;
+  margin-top: 20px;
+}
+
+
+.servicesGallery{
+
+  display: inline-table;
+  margin-top: 20px;
+}
+
+.contentGalleryItem {
+
+  width: 320px;
+  border-style: solid;
+  border-width: 1px;
+  padding: 10px;
+  float: left;
+  background-color: white;
+  margin-bottom: 10px;
+  margin-right: 15px;
+
+
+}
+
+.customFooter{
+  text-align: right;
+  text-decoration: bold;
+  border-style: dotted;
+  border-width: 1px;
+  padding-right: 10px;
+  margin-bottom: 10px;
+  padding-top: 10px;
+
+}
+

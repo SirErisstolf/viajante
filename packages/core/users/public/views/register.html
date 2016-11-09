@@ -1,0 +1,63 @@
+<div data-ng-controller="RegisterCtrl as reg">
+    <div ng-repeat="error in reg.registerError">
+        <div class="alert alert-danger animated fadeIn">{{error.msg}}</div>
+    </div>
+    <div class="alert alert-danger animated fadeIn" ng-show="reg.usernameError">{{reg.usernameError}}</div>
+    <div class="alert alert-danger animated fadeIn" ng-show="reg.emailError">{{reg.emailError}}</div>
+    <form id="register_form" ng-submit="reg.register()">
+        <h2>Registro</h2>
+
+        <div class="form-group">
+            <input required id="name" type="text" name="name" placeholder="Nombre Completo"
+                   ng-model="reg.user.name" class="form-control">
+
+            <div class="error_message">Por favor ingresa información correcta #</div>
+            <span class="pic user"></span>
+        </div>
+
+        <div class="form-group">
+            <input required id="email_block" type="email" name="email" placeholder="Correo Electrónico"
+                   ng-model="reg.user.email" class="form-control">
+
+            <div class="error_message">Por favor ingresa información correcta #</div>
+            <span class="pic email"></span>
+        </div>
+
+        <div class="form-group">
+            <input required id="username" type="text" name="username" placeholder="Usuario"
+                   ng-model="reg.user.username" class="form-control">
+
+            <div class="error_message">Por favor ingresa información correcta #</div>
+            <span class="pic username"></span>
+        </div>
+
+        <div class="form-group">
+            <input required id="password_block" name="password" type="{{reg.input.type}}"
+                   placeholder="{{reg.input.placeholder}}" ng-model="reg.user.password" class="form-control">
+
+            <div class="error_message">Por favor ingresa información correcta #</div>
+        <span class="pic password {{reg.input.iconClass}}" ng-click="reg.togglePasswordVisible()">
+              <div class="hide_text_password">
+                  {{reg.input.tooltipText}}
+              </div>
+        </span>
+        </div>
+        <div class="form-group">
+            <input required id="confirm_password" name="confirm_password" type="{{reg.input.type}}"
+                   placeholder="{{reg.input.placeholderConfirmPass}}" ng-model="reg.user.confirmPassword"
+                   class="form-control">
+
+            <div class="error_message">Por favor ingresa información correcta #</div>
+        <span class="pic password {{reg.input.iconClassConfirmPass}}" ng-click="reg.togglePasswordConfirmVisible()">
+              <div class="hide_text_password">
+                  {{reg.input.tooltipTextConfirmPass}}
+              </div>
+        </span>
+        </div>
+
+        <div class="form-group">
+            <button type="submit" class="btn btn-success btn-lg btn-block">Quiero una cuenta</button>
+            <a ui-sref='auth.login'>¿Ya tienes una cuenta? Ingresa</a>
+        </div>
+    </form>
+</div>

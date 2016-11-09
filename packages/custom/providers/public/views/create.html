@@ -1,0 +1,331 @@
+<!--link rel="stylesheet" href="bower_components/angular-color-picker/angular-color-picker.css">
+
+<script src="bower_components/angular-color-picker/angular-color-picker.js"></script-->
+<section data-ng-controller="ProvidersController">
+    <form name="providerForm" role="form" data-ng-submit="create(providerForm.$valid)" novalidate>
+        <div class="section">
+            <h3>Notificaciones</h3>
+            <p>
+                En esta sección podrás definir ofertas, alertar hospedaje lleno, o lo que 
+                necesites notificar a los viajantes ingresar a tu hospedaje.
+            </p>
+
+            <div class="form-group">
+                <a href="#">
+                    <span ng-click="addNotification()" class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                </a>
+            </div>
+            
+            <div class="alert alert-{{notificacion['tipo']}}" ng-repeat="notificacion in  provider['notifications']">
+                <div class="form-group">
+                    <label for="visible"> <input type="checkbox" ng-model="notificacion['visible']">Visible</label>
+                </div>
+                <div class="form-group">
+                    <input type="text" placeholder="Mensaje" class="form-control" ng-model="notificacion['message']">
+                    <div ng-show="!notificacion['message']" class="help-block">
+                        <p>Campo requerido</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                  <label for="tipo">Tipo:</label>
+                  <select class="form-control" ng-model="notificacion['tipo']">
+                    <option value="success">success</option>
+                    <option value="info">info</option>
+                    <option value="warn">warn</option>
+                    <option value="danger">danger</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                    <a href="#">
+                        <span ng-click="removeNotification($index)" class="glyphicon glyphicon-remove"></span>
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h3>Banner</h3>
+
+            <p>
+                En esta sección podrás configurar el banner de tú página que contendrá el nombre del hospedaje, una foto
+                y el slogan.
+            </p>
+
+            <div class="my-form-group">
+                <label for="selected" class="col-md-3 control-label"> Tipo de Hospedaje: </label>
+                <select name="selected" id="selected" ng-model="provider.lodgingType" class="customSelect">
+                    <option ng-repeat="option in lodging.availableOpcions" value="{{option.lodgingType}}">
+                        {{option.lodgingType}}
+                    </option>
+                </select>
+            </div>
+
+            <div class="form-group" ng-class="{ 'has-error' : submitted && providerForm.title.$invalid }">
+                <label mean-token="'create-title'" class="col-md-3 control-label">Nombre Hospedaje</label>
+
+                <div class="col-md-9">
+                    <input name="title" type="text" class="form-control" data-ng-model="provider.title" id="title"
+                           placeholder="Ej: Cabañas Viajante" required>
+
+                    <div ng-show="submitted && providerForm.title.$invalid" class="help-block">
+                        <p ng-show="providerForm.title.$error.required">Campo requerido</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group" ng-class="{ 'has-error' : submitted && providerForm.subtitle.$invalid }">
+                <label mean-token="'create-subtitle'" class="col-md-3 control-label">Slogan</label>
+
+                <div class="col-md-9">
+                    <input name="subtitle" type="text" class="form-control" data-ng-model="provider.subtitle"
+                           id="subtitle" placeholder="Ej: El encanto viajar" required>
+
+                    <div ng-show="submitted && providerForm.subtitle.$invalid" class="help-block">
+                        <p ng-show="providerForm.subtitle.$error.required">Campo requerido</p>
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <h4>Foto Banner</h4>
+                <mean-upload file-dest="'/banner/'" upload-callback="uploadFinished(files)"
+                             upload-file-callback="uploadBannerFileCallback(file)"></mean-upload>
+                <div ng-repeat="image in imageBannerSrc">
+                    <img ng-src="{{image}}" height="100"/>
+
+                    <p>{{getFileName(image,'banner')}}</p>
+                </div>
+                <button ng-click="removeBanner()" type="button" class="customBtn">Remover</button>
+
+            </div>
+
+        </div>
+
+        <div class="section">
+            <h3>Contenido</h3>
+
+            <p>
+                Ingresa un texto que atraiga a los viajantes hacia tú hospedaje. Tienes 1000 caracteres para explicar
+                por qué los viajantes deberían elegir tu hospedaje.
+            </p>
+
+            <div class="form-group" ng-class="{ 'has-error' : submitted && providerForm.content.$invalid }">
+                <label mean-token="'create-content'" for="content"></label>
+
+                <div class="col-md-9">
+                    <textarea name="content" data-ng-model="provider.content" id="content" cols="30" rows="10"
+                              placeholder="Ingresa aquí tu texto" class="form-control" required></textarea>
+
+                    <div ng-show="submitted && providerForm.content.$invalid" class="help-block">
+                        <p ng-show="providerForm.content.$error.required">Campo requerido</p>
+                    </div>
+                </div>
+            </div>
+            <div class="galleryForm">
+                <h4>Fotos Galeria de Imagenes</h4>
+
+                <p>
+                    Selecciona fotografías que acompañen el texto de esta sección. Te recomendamos usar fotografias
+                    horizontales de 300 x 200
+                </p>
+                <mean-upload file-dest="'/content/'" upload-callback="uploadFinished(files)"
+                             upload-file-callback="uploadContentFileCallback(file)"></mean-upload>
+                <div ng-repeat="image in imagesContentSrc" class="imagesContent">
+                    <img ng-src="{{image}}" height="200" width="300"/>
+
+                    <p>{{getFileName(image,'content')}}</p>
+                    <button ng-click="removeContentImage($index)" type="button" class="customBtn">Remover</button>
+                </div>
+            </div>
+
+
+        </div>
+
+
+        <div class="section">
+            <h3>Hospedajes y Servicios</h3>
+
+            <p>
+                En esta sección podrás ingresar el tipo de hospedaje que ofreces y los servicios adicionales.
+            </p>
+
+            <div class="subsection">
+                <h4>Hospedajes</h4>
+
+                <div class="form-group" ng-class="{ 'has-error' : submitted && providerForm.cabin.$invalid }">
+                    <label mean-token="'create-cabin'"></label>
+
+                    <div class="col-md-11">
+                        <button ng-click="addCabin()" type="button" class="customBtn">Agregar Tipo de Hospedaje</button>
+                        <div ng-repeat="item in cabins" class="cabinForm">
+                            <input type="text" placeholder="Nombre del tipo de hospedaje (pieza, cabaña, etc)"
+                                   ng-model="item.name">
+                            <input type="text" placeholder="Capacidad" ng-model="item.capacity">
+                            <input type="text" placeholder="Precio" ng-model="item.price">
+                            <button ng-click="removeCabin($index)" type="button" class="customBtn">Remover</button>
+
+                            <div>
+                                <label>Foto </label>
+                                <mean-upload file-dest="'/cabins/'" upload-callback="uploadFinished(files)"
+                                             upload-file-callback="uploadCabinFileCallback(file,$index)"></mean-upload>
+                                <div ng-repeat="image in imagesCabinSrc[$index]">
+                                    <img ng-src="{{image}}" height="200" width="300"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="subsection">
+                <h4>Servicios</h4>
+
+                <div class="form-group" ng-class="{ 'has-error' : submitted && providerForm.service.$invalid }">
+                    <label mean-token="'create-service'"></label>
+
+                    <div class="col-md-9">
+                        <button ng-click="addService()" type="button" class="customBtn">Agregar Servicio</button>
+                        <div ng-repeat="item in services">
+                            <input type="text" placeholder="Servicio" ng-model="item.name">
+                            <input type="text" placeholder="Desripción" ng-model="item.description">
+                            <button ng-click="removeService($index)" type="button" class="customBtn">Remover</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="galleryForm">
+                    <h4>Fotos Galeria de imágenes</h4>
+
+                    <p>
+                        Selecciona fotografías que acompañen el texto de esta sección. Te recomendamos usar fotografias
+                        horizontales de 300 x 200
+                    </p>
+                    <mean-upload file-dest="'/services/'" upload-callback="uploadFinished(files)"
+                                 upload-file-callback="uploadServicesFileCallback(file)"></mean-upload>
+                    <div ng-repeat="image in imagesServicesSrc" class="imagesContent">
+                        <img ng-src="{{image}}" height="200" width="300"/>
+
+                        <p>{{getFileName(image,'services')}}</p>
+                        <button ng-click="removeServicesImage()" type="button" class="customBtn">Remover</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="section">
+            <h3>Ubicación e Información de Contacto</h3>
+
+            <p>
+            </p>
+
+            <div class="subsection">
+                <h4>Información de Contacto</h4>
+
+                <div class="form-group" ng-class="{ 'has-error' : submitted && providerForm.contact.$invalid }">
+                    <label mean-token="'create-contact'"></label>
+
+                    <div class="col-md-9">
+                        <input name="person" type="text" class="form-control" data-ng-model="provider.contact.person"
+                               id="person" placeholder="Persona de contacto" required>
+                        <input name="phone" type="text" class="form-control" data-ng-model="provider.contact.phone"
+                               id="phone" placeholder="Numero Telefonico" required>
+                        <input name="email" type="text" class="form-control" data-ng-model="provider.contact.email"
+                               id="email" placeholder="Email" required>
+                        <input name="website" type="text" class="form-control" data-ng-model="provider.contact.website"
+                               id="website" placeholder="URL Website" required>
+
+                        <div ng-show="submitted && providerForm.contact.$invalid" class="help-block">
+                            <p ng-show="providerForm.contact.$error.required">Campo requerido</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="subsection">
+                <h4>Ubicación</h4>
+
+                <div class="form-group" ng-class="{ 'has-error' : submitted && providerForm.location.$invalid }">
+                    <label mean-token="'create-location'"></label>
+
+                    <div class="col-md-9">
+                        <input name="address" type="text" class="form-control" data-ng-model="provider.location.address"
+                               id="address" placeholder="Dirección" required>
+                        <input name="latitude" type="text" class="form-control" data-ng-model="provider.location.lat"
+                               id="latitude" placeholder="Latitud" required>
+                        <input name="longitude" type="text" class="form-control" data-ng-model="provider.location.lon"
+                               id="longitude" placeholder="Longitud" required>
+
+                        <div>
+                            <label for="selected"> Ciudad: </label>
+                            <select name="selected" id="selected" ng-model="provider.location.city">
+                                <option ng-repeat="option in city.availableOpcions" value="{{option.comuna_nombre}}">
+                                    {{option.comuna_nombre}}
+                                </option>
+                            </select>
+                        </div>
+                        <div ng-show="submitted && providerForm.location.$invalid" class="help-block">
+                            <p ng-show="providerForm.location.$error.required">Campo requerido</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="section">
+            <h3>Colores de la Página</h3>
+
+            <div class="subsection">
+                <h4>Color de Fondo Secciones</h4>
+                <color-picker ng-model="bgColorSection"></color-picker>
+                <input type="text" ng-model="bgColorSection" ng-init="bgColorSection = '#ffffff'">
+            </div>
+            <div class="subsection">
+                <h4>Color Textos</h4>
+                <color-picker ng-model="textColor"></color-picker>
+                <input type="text" ng-model="textColor" ng-init="textColor = '#000000'">
+            </div>
+
+            <div class="subsection">
+                <h4>Preview</h4>
+
+                <div ng-style="{'background-color': bgColorPage, 'height':'260px' ,'text-align':'center','padding-left':'15px','padding-right':'15px','padding-top':'1px','margin-top':'5px;'}">
+                    <div ng-style="{'background-color': bgColorSection ,color: textColor , 'height':'220','padding-top':'1px','padding-left':'5px','margin-top':'15px',    'border-style': 'dotted','border-width': '1px'}">
+                        <h3>Titulo</h3>
+
+                        <p>Este es el contenido a mostrar en la pagina. Trata de buscar buenas combinaciones para hacer
+                            tu pagina atractiva pero tambien facil de leer, recuerda que tu pagina también será vista
+                            desde celulares.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="section">
+            <h3>Permisos</h3>
+
+            <div class="form-group">
+                <label mean-token="'permissions'" for="permissions"></label>
+
+                <div class="col-md-9">
+                    <ui-select multiple ng-model="provider.permissions" append-to-body="'true'"
+                               on-select="selectPermission()">
+                        <ui-select-match placeholder="Select permissions..." ng-click="showDescendants();">{{$item}}
+                        </ui-select-match>
+                        <ui-select-choices repeat="circle in availableCircles | filter:$select.search"
+                                           name="permissions">
+                            {{circle}}
+                        </ui-select-choices>
+                    </ui-select>
+                </div>
+            </div>
+            <div class="form-group" ng-show="descendants.length">
+                <label mean-token="'descendants'" for="descendants" class="col-md-3 control-label">Descendants</label>
+
+                <div class="col-md-9">
+                    <span ng-repeat="descendant in descendants">{{descendant}} <span ng-hide="$last">, </span></span>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-3 col-md-9">
+                <button mean-token="'create-submit'" type="submit" class="btn btn-info">Guardar</button>
+            </div>
+        </div>
+    </form>
+</section>
